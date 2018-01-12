@@ -27,7 +27,7 @@ let redirectLoggedInUserToHome = (req,res)=>{
   if(req.urlIsOneOf(['/','/login']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
-  if(req.urlIsOneOf(['/','/home','/logout']) && !req.user) res.redirect('/login');
+  if(req.urlIsOneOf(['/','/home','/logout']) && !req.user) res.redirect('/login.html');
 }
 
 let app = create();
@@ -35,16 +35,13 @@ app.use(logRequest);
 app.use(loadUser);
 app.use(redirectLoggedInUserToHome);
 app.use(redirectLoggedOutUserToLogin);
-app.get('/login',(req,res)=>{
-  res.setHeader('Content-type','text/html');
-  res.write('<form method="POST"> <input name="userName"><input name="place"> <input type="submit"></form>');
-  res.end();
-});
+
 app.post('/login',(req,res)=>{
-  let user = registered_users.find(u=>u.userName==req.body.userName);
+  let user = registered_users.find(u=>u.userName==req.body.username);
+  console.log(user);
   if(!user) {
     res.setHeader('Set-Cookie',`logInFailed=true`);
-    res.redirect('/login');
+    res.redirect('/login.html');
     return;
   }
   let sessionid = new Date().getTime();
@@ -72,7 +69,8 @@ app.post('/addTodoData',(req,res)=>{
 
 app.get('default',(req,res)=>{
   if(lib.urlExist(req.url)) {
-    res.writeHead(200,{"Content-Type":lib.contentType(req.url)});
+    res.statusCode = 200;
+    res.setHeader('Content-Type',lib.contentType(req.url));
     res.write(fs.readFileSync("./public/" + req.url));
   }else
     lib.send404Response(res);
