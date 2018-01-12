@@ -64,8 +64,6 @@ app.get('/logout',(req,res)=>{
 
 app.post('/addTodoData',(req,res)=>{
   let todo = req.body;
-  console.log('gfgfisgihgsiihvdihvihvihvxihvbhisvihbihsvihbvihdsvihvdihvihvxihvi');
-  console.log(req.body);
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
   let username = user.userName;
