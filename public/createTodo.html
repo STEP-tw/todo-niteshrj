@@ -7,9 +7,11 @@
 
 <body>
   <h1>Create your todo</h1>
-  <form action="/addTodo" method="post">
-    Title: <input type="text" id="name" name="name"><br><br>
-    Description: <textarea type="text" id="comment" name="comment" cols="90" style="height:70px"></textarea>
+  <form action="/addTodoData" method="post">
+    Title: <input type="text" id="title" name="title"><br><br>
+    Description: <textarea type="text" id="desc" name="desc" cols="90" style="height:70px"></textarea>
+    <br><br>
+    Todo: <textarea type="text" id="todoList" name="todoList" cols="90" style="height:70px"></textarea>
     <br><br>
     <button id="submit" type="submit">Submit</button>
   </form>

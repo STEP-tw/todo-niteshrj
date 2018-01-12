@@ -21,14 +21,6 @@ const parseCookies = text=> {
   }
 }
 let invoke = function(req,res){
-  // let handler = this._handlers[req.method][req.url];
-  // if(!handler){
-  //   res.statusCode = 404;
-  //   res.write('Page not found!');
-  //   res.end();
-  //   return;
-  // }
-  // handler(req,res);
   let handler = this._handlers[req.method][req.url];
   if(!handler){
     handler = this._handlers[req.method]["default"];
@@ -73,7 +65,6 @@ const main = function(req,res){
 
 let create = ()=>{
   let rh = (req,res)=>{
-    console.log('jgd');
     main.call(rh,req,res)
   };
   initialize.call(rh);

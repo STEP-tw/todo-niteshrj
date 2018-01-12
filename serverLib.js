@@ -1,7 +1,8 @@
 const fs = require('fs');
 let lib = {
   send404Response : function(res) {
-    res.writeHead(404, {"Content-Type":"text/plain"});
+    res.setHeader('Content-Type','text/plain');
+    res.statusCode=404;
     res.write("Error 404: Page not found!");
   },
   urlExist : function(url){
