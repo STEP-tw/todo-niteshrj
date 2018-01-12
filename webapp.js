@@ -21,12 +21,17 @@ const parseCookies = text=> {
   }
 }
 let invoke = function(req,res){
+  // let handler = this._handlers[req.method][req.url];
+  // if(!handler){
+  //   res.statusCode = 404;
+  //   res.write('Page not found!');
+  //   res.end();
+  //   return;
+  // }
+  // handler(req,res);
   let handler = this._handlers[req.method][req.url];
   if(!handler){
-    res.statusCode = 404;
-    res.write('Page not found!');
-    res.end();
-    return;
+    handler = this._handlers[req.method]["default"];
   }
   handler(req,res);
 }

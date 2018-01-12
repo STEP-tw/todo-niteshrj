@@ -1,6 +1,7 @@
 let fs = require('fs');
 const timeStamp = require('./time.js').timeStamp;
 const http = require('http');
+const lib = require('./serverLib.js');
 const create = require('./webapp').create;
 let registered_users = [{userName:'alok',name:'alok ranjan'},{userName:'nitesh',name:'nitesh ranjan'}];
 let toS = o=>JSON.stringify(o,null,2);
@@ -54,13 +55,24 @@ app.post('/login',(req,res)=>{
 });
 app.get('/home',(req,res)=>{
   res.setHeader('Content-type','text/html');
-  res.write(`<p>Hello ${req.user.name}</p>`);
+  // res.write(`<p>Hello ${req.user.name}</p>`);
+  let home = fs.readFileSync('./public/home.html','utf8');
+  res.write(home);
   res.end();
 });
 app.get('/logout',(req,res)=>{
   res.setHeader('Set-Cookie',[`loginFailed=false,Expires=${new Date(1).toUTCString()}`,`sessionid=0,Expires=${new Date(1).toUTCString()}`]);
   delete req.user.sessionid;
   res.redirect('/login');
+});
+
+app.get('default',(req,res)=>{
+  if(lib.urlExist(req.url)) {
+    res.writeHead(200,{"Content-Type":lib.contentType(req.url)});
+    res.write(fs.readFileSync("./public/" + req.url));
+  }else
+    lib.send404Response(res);
+  res.end();
 });
 
 const PORT = 8000;
