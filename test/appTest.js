@@ -62,4 +62,16 @@ describe('app',()=>{
       })
     })
   })
+  describe('POST /addTodoData',()=>{
+    it('redirects to createTodo page',done=>{
+      request(app,{method:'POST',url:'/login',body:'username=alok'},res=>{
+        let sessionid=res['headers']['Set-Cookie'].split("=")[1];
+        request(app,{method:'POST',url:'/addTodoData',
+                headers: {cookie:`logInFailed=true; loginFailed=false,Expires=Thu, 01 Jan 1970 00:00:00 GMT; sessionid=${sessionid}`},body:'title=milk&desc=buyMilk&todoList=gotoshop'},res=>{
+          th.should_be_redirected_to(res,'/createTodo.html');
+        })
+        done();
+      })
+    })
+  })
 })

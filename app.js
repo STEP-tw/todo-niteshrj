@@ -24,10 +24,10 @@ let loadUser = (req,res)=>{
   }
 };
 let redirectLoggedInUserToHome = (req,res)=>{
-  if(req.urlIsOneOf(['/','/login','/home']) && req.user) res.redirect('/home');
+  if(req.urlIsOneOf(['/','/login']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
-  if(req.urlIsOneOf(['/','/home','/logout']) && !req.user) res.redirect('/login.html');
+  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html']) && !req.user) res.redirect('/login.html');
 }
 
 let app = create();
@@ -58,7 +58,6 @@ app.get('/home',(req,res)=>{
 app.get('/logout',(req,res)=>{
   res.setHeader('Set-Cookie',[`loginFailed=false,Expires=${new Date(1).toUTCString()}`,`sessionid=0,Expires=${new Date(1).toUTCString()}`]);
   res.setHeader('Content-type','text/html');
-  res.statusCode=302;
   delete req.user.sessionid;
   res.redirect('/login.html');
 });
