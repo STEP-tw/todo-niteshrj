@@ -1,6 +1,6 @@
 let fs = require('fs');
 const timeStamp = require('./time.js').timeStamp;
-const lib = require('./serverLib.js');
+const lib = require('./appLib.js');
 const create = require('./webapp').create;
 let registered_users = [{userName:'alok'},{userName:'nitesh'}];
 let toS = o=>JSON.stringify(o,null,2);
@@ -44,6 +44,7 @@ app.post('/login',(req,res)=>{
     res.redirect('/login.html');
     return;
   }
+  lib.createUserTodoFile(user.userName);
   let sessionid = new Date().getTime();
   res.setHeader('Set-Cookie',`sessionid=${sessionid}`);
   user.sessionid = sessionid;
@@ -63,7 +64,13 @@ app.get('/logout',(req,res)=>{
 
 app.post('/addTodoData',(req,res)=>{
   let todo = req.body;
-  console.log(JSON.stringify(todo));
+  console.log('gfgfisgihgsiihvdihvihvihvxihvbhisvihbihsvihbvihdsvihvdihvihvxihvi');
+  console.log(req.body);
+  let sessionid = req.cookies.sessionid;
+  let user = registered_users.find(u=>u.sessionid==sessionid);
+  let username = user.userName;
+  lib.pushTodoIntoUserFile(username,todo);
+  res.redirect('/createTodo.html');
   res.end();
 });
 
