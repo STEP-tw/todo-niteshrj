@@ -38,6 +38,12 @@ let lib = {
     users[username].push(todo);
     users = JSON.stringify(users,null,2);
     fs.writeFileSync('./data/todoData.json',users);
+  },
+  getUserTodo : function(username){
+    let users = fs.readFileSync("./data/todoData.json","utf8");
+    users = JSON.parse(users);
+    let todo = users[username];
+    return todo;
   }
 }
 module.exports = lib;

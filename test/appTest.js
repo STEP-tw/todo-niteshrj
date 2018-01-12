@@ -1,5 +1,4 @@
-let chai = require('chai');
-let assert = chai.assert;
+let assert = require('chai').assert;
 let request = require('./requestSimulator.js');
 let th = require('./testHelper.js');
 let app = require('./../app.js');
@@ -27,6 +26,14 @@ describe('app',()=>{
       request(app,{method:'GET',url:'/login.html'},res=>{
         th.status_is_ok(res);
         th.content_type_is(res,'text/html');
+        done();
+      })
+    })
+  })
+  describe('GET /logout.html',()=>{
+    it('gives the login page',done=>{
+      request(app,{method:'GET',url:'/logout'},res=>{
+        th.should_be_redirected_to(res,'/login.html');
         done();
       })
     })

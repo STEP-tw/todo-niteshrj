@@ -24,7 +24,7 @@ let loadUser = (req,res)=>{
   }
 };
 let redirectLoggedInUserToHome = (req,res)=>{
-  if(req.urlIsOneOf(['/','/login']) && req.user) res.redirect('/home');
+  if(req.urlIsOneOf(['/','/login','/home']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
   if(req.urlIsOneOf(['/','/home','/logout']) && !req.user) res.redirect('/login.html');
@@ -38,7 +38,6 @@ app.use(redirectLoggedOutUserToLogin);
 
 app.post('/login',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.username);
-  console.log(user);
   if(!user) {
     res.setHeader('Set-Cookie',`logInFailed=true`);
     res.redirect('/login.html');
@@ -58,8 +57,10 @@ app.get('/home',(req,res)=>{
 });
 app.get('/logout',(req,res)=>{
   res.setHeader('Set-Cookie',[`loginFailed=false,Expires=${new Date(1).toUTCString()}`,`sessionid=0,Expires=${new Date(1).toUTCString()}`]);
+  res.setHeader('Content-type','text/html');
+  res.statusCode=302;
   delete req.user.sessionid;
-  res.redirect('/login');
+  res.redirect('/login.html');
 });
 
 app.post('/addTodoData',(req,res)=>{
@@ -71,7 +72,18 @@ app.post('/addTodoData',(req,res)=>{
   res.redirect('/createTodo.html');
   res.end();
 });
-
+app.get('/viewTodo.html',(req,res)=>{
+  res.setHeader('Content-type','text/html');
+  let viewTodo = fs.readFileSync('./public/viewTodo.html','utf8');
+  let sessionid = req.cookies.sessionid;
+  let user = registered_users.find(u=>u.sessionid==sessionid);
+  let username = user.userName;
+  let userTodo = lib.getUserTodo(username);
+  userTodo = JSON.stringify(userTodo);
+  viewTodo = viewTodo.replace('<h2 id="replacer"></h2>',userTodo);
+  res.write(viewTodo);
+  res.end();
+});
 app.get('default',(req,res)=>{
   if(lib.urlExist(req.url)) {
     res.statusCode = 200;
