@@ -24,10 +24,10 @@ let loadUser = (req,res)=>{
   }
 };
 let redirectLoggedInUserToHome = (req,res)=>{
-  if(req.urlIsOneOf(['/','/login']) && req.user) res.redirect('/home');
+  if(req.urlIsOneOf(['/','/login.html']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
-  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html']) && !req.user) res.redirect('/login.html');
+  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html','/createTodo.html']) && !req.user) res.redirect('/login.html');
 }
 
 let app = create();
@@ -72,7 +72,6 @@ app.post('/addTodoData',(req,res)=>{
   res.end();
 });
 app.get('/viewTodo.html',(req,res)=>{
-  res.setHeader('Content-type','text/html');
   let viewTodo = fs.readFileSync('./public/viewTodo.html','utf8');
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
@@ -80,6 +79,7 @@ app.get('/viewTodo.html',(req,res)=>{
   let userTodo = lib.getUserTodo(username);
   userTodo = JSON.stringify(userTodo);
   viewTodo = viewTodo.replace('<h2 id="replacer"></h2>',userTodo);
+  res.setHeader('Content-Type','text/html');
   res.write(viewTodo);
   res.end();
 });
