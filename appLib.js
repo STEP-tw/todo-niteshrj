@@ -9,6 +9,12 @@ let lib = {
   urlExist : function(url){
     return fs.existsSync("./public/" + url)
   },
+  getUserName : function(req,registered_users){
+    let sessionid = req.cookies.sessionid;
+    let user = registered_users.find(u=>u.sessionid==sessionid);
+    let username = user.userName;
+    return username;
+  },
   contentType : function(requstUrl) {
     let urlExtension = requstUrl.substr(requstUrl.lastIndexOf("."));
     urlExtension = urlExtension.replace(".", "");
