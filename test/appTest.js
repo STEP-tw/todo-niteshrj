@@ -63,7 +63,7 @@ describe('app',()=>{
         let sessionid=getSessionId(res);
         request(app,{method:'POST',url:'/addTodoData',
                 headers: {cookie:`sessionid=${sessionid}`},body:'title=milk&desc=buyMilk&todoList=gotoshop'},res=>{
-          th.should_be_redirected_to(res,'/createTodo.html');
+          th.should_be_redirected_to(res,'/writeItems.html');
         })
         done();
       })

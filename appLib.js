@@ -28,14 +28,23 @@ let lib = {
     let users = fs.readFileSync("./data/todoData.json","utf8");
     users = JSON.parse(users);
     if(!users[username])
-      users[username] = [];
+      users[username] = {};
     users = JSON.stringify(users,null,2);
     fs.writeFileSync('./data/todoData.json',users);
   },
   pushTodoIntoUserFile : function(username,todo){
     let users = fs.readFileSync("./data/todoData.json","utf8");
     users = JSON.parse(users);
-    users[username].push(todo);
+    users[username][todo['title']] = todo;
+    users = JSON.stringify(users,null,2);
+    fs.writeFileSync('./data/todoData.json',users);
+  },
+  pushItemsIntoUserFile : function(username,title,item){
+    let users = fs.readFileSync("./data/todoData.json","utf8");
+    users = JSON.parse(users);
+    if(!('items' in users[username][title]))
+      users[username][title]['items']=[];
+    users[username][title]['items'].push(item);
     users = JSON.stringify(users,null,2);
     fs.writeFileSync('./data/todoData.json',users);
   },

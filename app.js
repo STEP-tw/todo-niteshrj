@@ -67,8 +67,19 @@ app.post('/addTodoData',(req,res)=>{
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
   let username = user.userName;
+  console.log(todo);
   lib.pushTodoIntoUserFile(username,todo);
-  res.redirect('/createTodo.html');
+  res.redirect('/writeItems.html');
+  res.end();
+});
+app.post('/addItems',(req,res)=>{
+  let todo = req.body;
+  let sessionid = req.cookies.sessionid;
+  let user = registered_users.find(u=>u.sessionid==sessionid);
+  let username = user.userName;
+  console.log(todo);
+  lib.pushItemsIntoUserFile(username,todo.title,todo.item);
+  res.redirect('/writeItems.html');
   res.end();
 });
 app.get('/viewTodo.html',(req,res)=>{
