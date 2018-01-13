@@ -27,7 +27,7 @@ let redirectLoggedInUserToHome = (req,res)=>{
   if(req.urlIsOneOf(['/','/login.html']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
-  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html','/createTodo.html']) && !req.user) res.redirect('/login.html');
+  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html','/createTodo.html','/writeItems.html']) && !req.user) res.redirect('/login.html');
 }
 
 let app = create();
@@ -67,7 +67,6 @@ app.post('/addTodoData',(req,res)=>{
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
   let username = user.userName;
-  console.log(todo);
   lib.pushTodoIntoUserFile(username,todo);
   res.redirect('/writeItems.html');
   res.end();
@@ -77,7 +76,6 @@ app.post('/addItems',(req,res)=>{
   let sessionid = req.cookies.sessionid;
   let user = registered_users.find(u=>u.sessionid==sessionid);
   let username = user.userName;
-  console.log(todo);
   lib.pushItemsIntoUserFile(username,todo.title,todo.item);
   res.redirect('/writeItems.html');
   res.end();

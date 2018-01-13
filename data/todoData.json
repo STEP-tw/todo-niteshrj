@@ -14,6 +14,14 @@
       "items": [
         "d"
       ]
+    },
+    "milk": {
+      "title": "milk",
+      "desc": "buyMilk",
+      "todoList": "gotoshop",
+      "items": [
+        "buyMilk"
+      ]
     }
   }
 }

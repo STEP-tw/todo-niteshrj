@@ -57,12 +57,24 @@ describe('app',()=>{
       })
     })
   })
-  describe('POST /addTodoData if loged in',()=>{
+  describe('POST /addTodoData',()=>{
     it('redirects to createTodo page',done=>{
       request(app,{method:'POST',url:'/login',body:'username=alok'},res=>{
         let sessionid=getSessionId(res);
         request(app,{method:'POST',url:'/addTodoData',
                 headers: {cookie:`sessionid=${sessionid}`},body:'title=milk&desc=buyMilk&todoList=gotoshop'},res=>{
+          th.should_be_redirected_to(res,'/writeItems.html');
+        })
+        done();
+      })
+    })
+  })
+  describe('POST /addItems',()=>{
+    it('redirects to createTodo page',done=>{
+      request(app,{method:'POST',url:'/login',body:'username=alok'},res=>{
+        let sessionid=getSessionId(res);
+        request(app,{method:'POST',url:'/addItems',
+                headers: {cookie:`sessionid=${sessionid}`},body:'title=milk&item=buyMilk'},res=>{
           th.should_be_redirected_to(res,'/writeItems.html');
         })
         done();
@@ -86,6 +98,19 @@ describe('app',()=>{
           th.should_be_redirected_to(res,'/login.html');
         })
         done();
+    })
+  })
+  describe('GET /writeItems.html',()=>{
+    it('gives the login page',done=>{
+      request(app,{method:'POST',url:'/login',body:'username=alok'},res=>{
+        let sessionid=getSessionId(res);
+        request(app,{method:'GET',url:'/writeItems.html',
+                headers: {cookie:`sessionid=${sessionid}`}},res=>{
+          th.status_is_ok(res);
+          th.content_type_is(res,'text/html');
+        })
+        done();
+      })
     })
   })
   describe('GET /viewTodo.html',()=>{
