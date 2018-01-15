@@ -20,7 +20,10 @@
       "desc": "buyMilk",
       "todoList": "gotoshop",
       "items": [
-        "buyMilk"
+        {
+          "item": "buyMilk",
+          "done": false
+        }
       ]
     },
     "also": {
@@ -30,6 +33,27 @@
     "hu": {
       "title": "hu",
       "desc": "hu"
+    },
+    "jvjh": {
+      "title": "jvjh",
+      "desc": "jvhv"
+    },
+    "aloi": {
+      "title": "aloi",
+      "desc": "iiu",
+      "items": [
+        "hbhivi"
+      ]
+    },
+    "io": {
+      "title": "io",
+      "desc": "iojgiougo",
+      "items": [
+        {
+          "item": "hiyufufufusoi",
+          "done": false
+        }
+      ]
     }
   }
 }

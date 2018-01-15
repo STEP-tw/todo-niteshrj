@@ -2,6 +2,7 @@ let fs = require('fs');
 const timeStamp = require('./time.js').timeStamp;
 const lib = require('./appLib.js');
 const create = require('./webapp').create;
+const Item = require('./item.js').Item;
 let registered_users = [{userName:'alok'},{userName:'nitesh'}];
 let toS = o=>JSON.stringify(o,null,2);
 
@@ -72,7 +73,8 @@ app.post('/addTodoData',(req,res)=>{
 app.post('/addItems',(req,res)=>{
   let todo = req.body;
   let username = lib.getUserName(req,registered_users);
-  lib.pushItemsIntoUserFile(username,todo.title,todo.item);
+  let item = new Item(todo.item);
+  lib.pushItemsIntoUserFile(username,todo.title,item);
   res.redirect('/writeItems.html');
   res.end();
 });
