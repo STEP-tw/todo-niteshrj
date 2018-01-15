@@ -1,7 +1,6 @@
 const Item = require('../item.js').Item;
 const assert = require('chai').assert;
 
-
 describe('Item',()=>{
   describe('get status()',()=>{
     it('gives current status of the Item as done by default',()=>{
@@ -24,6 +23,12 @@ describe('Item',()=>{
       let item = new Item({});
       item.update({'title' : 'buy milk'});
       assert.deepEqual(item.item,{'title' : 'buy milk'});
+    })
+  })
+  describe('get item()',()=>{
+    it('gives the current item',()=>{
+      let item = new Item({});
+      assert.deepEqual(item.item,{});
     })
   })
 })

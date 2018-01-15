@@ -21,8 +21,8 @@
       "todoList": "gotoshop",
       "items": [
         {
-          "item": "buyMilk",
-          "done": false
+          "_item": "buyMilk",
+          "_done": false
         }
       ]
     },

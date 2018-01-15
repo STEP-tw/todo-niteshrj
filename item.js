@@ -1,19 +1,22 @@
 class Item{
   constructor(item){
-    this.item = item;
-    this.done = false;
+    this._item = item;
+    this._done = false;
+  }
+  get item(){
+    return this._item;
   }
   get status(){
-    return this.done;
+    return this._done;
   }
   markDone(){
-    this.done = true;
+    this._done = true;
   }
   markUndone(){
-    this.done = false;
+    this._done = false;
   }
   update(newItem){
-    this.item = newItem;
+    this._item = newItem;
   }
 }
 exports.Item = Item;
