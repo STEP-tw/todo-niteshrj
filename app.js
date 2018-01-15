@@ -25,10 +25,10 @@ let loadUser = (req,res)=>{
   }
 };
 let redirectLoggedInUserToHome = (req,res)=>{
-  if(req.urlIsOneOf(['/','/login.html']) && req.user) res.redirect('/home');
+  if(req.urlIsOneOf(['/','/login']) && req.user) res.redirect('/home');
 }
 let redirectLoggedOutUserToLogin = (req,res)=>{
-  if(req.urlIsOneOf(['/','/home','/logout','/viewTodo.html','/createTodo.html','/writeItems.html']) && !req.user) res.redirect('/login.html');
+  if(req.urlIsOneOf(['/home','/logout','/viewTodo','/createTodo','/writeItems']) && !req.user) res.redirect('/login');
 }
 
 let app = create();
@@ -41,7 +41,7 @@ app.post('/login',(req,res)=>{
   let user = registered_users.find(u=>u.userName==req.body.username);
   if(!user) {
     res.setHeader('Set-Cookie',`logInFailed=true`);
-    res.redirect('/login.html');
+    res.redirect('/login');
     return;
   }
   lib.createUserTodoFile(user.userName);
@@ -60,14 +60,14 @@ app.get('/logout',(req,res)=>{
   res.setHeader('Set-Cookie',[`loginFailed=false,Expires=${new Date(1).toUTCString()}`,`sessionid=0,Expires=${new Date(1).toUTCString()}`]);
   res.setHeader('Content-type','text/html');
   delete req.user.sessionid;
-  res.redirect('/login.html');
+  res.redirect('/login');
 });
 
 app.post('/addTodoData',(req,res)=>{
   let todo = req.body;
   let username = lib.getUserName(req,registered_users);
   lib.pushTodoIntoUserFile(username,todo);
-  res.redirect('/writeItems.html');
+  res.redirect('/writeItems');
   res.end();
 });
 app.post('/addItems',(req,res)=>{
@@ -75,10 +75,10 @@ app.post('/addItems',(req,res)=>{
   let username = lib.getUserName(req,registered_users);
   let item = new Item(todo.item);
   lib.pushItemsIntoUserFile(username,todo.title,item);
-  res.redirect('/writeItems.html');
+  res.redirect('/writeItems');
   res.end();
 });
-app.get('/viewTodo.html',(req,res)=>{
+app.get('/viewTodo',(req,res)=>{
   let viewTodo = fs.readFileSync('./public/viewTodo.html','utf8');
   let username = lib.getUserName(req,registered_users);
   let userTodo = lib.getUserTodo(username);
@@ -89,6 +89,9 @@ app.get('/viewTodo.html',(req,res)=>{
   res.end();
 });
 app.get('default',(req,res)=>{
+  if(req.url=='/')
+    req.url='/login';
+  req.url += '.html';
   if(lib.urlExist(req.url)) {
     res.statusCode = 200;
     res.setHeader('Content-Type',lib.contentType(req.url));
