@@ -89,9 +89,11 @@ app.get('/viewTodo',(req,res)=>{
   res.end();
 });
 app.get('default',(req,res)=>{
+  let htmlFiles = ['/login','/home','/createTodo','/viewTodo','/writeItems'];
   if(req.url=='/')
     req.url='/login';
-  req.url += '.html';
+  if(htmlFiles.includes(req.url))
+    req.url += '.html';
   if(lib.urlExist(req.url)) {
     res.statusCode = 200;
     res.setHeader('Content-Type',lib.contentType(req.url));
