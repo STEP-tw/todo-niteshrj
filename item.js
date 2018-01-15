@@ -6,10 +6,10 @@ class Item{
   get status(){
     return this.done;
   }
-  done(){
+  markDone(){
     this.done = true;
   }
-  undone(){
+  markUndone(){
     this.done = false;
   }
   update(newItem){
