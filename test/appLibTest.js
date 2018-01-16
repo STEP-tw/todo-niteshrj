@@ -1,4 +1,4 @@
-const appLib = require('../appLib');
+const appLib = require('../lib/appLib');
 const assert = require('chai').assert;
 
 

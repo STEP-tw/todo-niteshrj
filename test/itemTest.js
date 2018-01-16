@@ -1,4 +1,4 @@
-const Item = require('../item.js').Item;
+const Item = require('../lib/item.js').Item;
 const assert = require('chai').assert;
 
 describe('Item',()=>{
