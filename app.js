@@ -1,5 +1,4 @@
 let fs = require('fs');
-const lib = require('./lib/appLib.js');
 const create = require('./webapp').create;
 const serverLib = require('./lib/serverLib.js');
 
