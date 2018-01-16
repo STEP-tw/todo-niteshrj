@@ -1,4 +1,4 @@
-const Todo = require('../todo.js').Todo;
+const Todo = require('../lib/todo.js').Todo;
 const assert = require('chai').assert;
 
 describe('Todo',()=>{
@@ -8,6 +8,17 @@ describe('Todo',()=>{
       assert.equal(todo.title,'buy milk');
       todo.updateTitle('buy milk powder');
       assert.equal(todo.title,'buy milk powder');
+      assert.equal(todo.description,'go to shop');
+      assert.deepEqual(todo.items,[]);
+    })
+  })
+  describe('addItem()',()=>{
+    it('add items into the todo',()=>{
+      let todo = new Todo('buy milk','go to shop',[]);
+      todo.addItem('give money');
+      assert.deepEqual(todo.items,['give money']);
+      todo.addItem('take milk');
+      assert.deepEqual(todo.items,['give money','take milk']);
     })
   })
   describe('updateDescription()',()=>{
