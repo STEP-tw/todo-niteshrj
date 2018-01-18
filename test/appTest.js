@@ -74,7 +74,7 @@ describe('app',()=>{
       request(app,{method:'POST',url:'/login',body:'username=alok'},res=>{
         let sessionid=getSessionId(res);
         request(app,{method:'POST',url:'/addItems',
-                headers: {cookie:`sessionid=${sessionid}`},body:'title=milk&item=buyMilk'},res=>{
+                headers: {cookie:`sessionid=${sessionid}`},body:'todoNumber=0&item=buyMilk'},res=>{
           th.should_be_redirected_to(res,'/writeItems');
         })
         done();
