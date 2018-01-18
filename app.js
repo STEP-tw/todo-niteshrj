@@ -2,6 +2,8 @@ let fs = require('fs');
 const create = require('./webapp').create;
 const serverLib = require('./lib/serverLib.js');
 
+serverLib.loadFileData();
+
 let app = create();
 app.use(serverLib.logRequest);
 app.use(serverLib.loadUser);

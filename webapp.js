@@ -52,7 +52,6 @@ const main = function(req,res){
   req.on('end',()=>{
     req.body = parseBody(content);
     content="";
-    debugger;
     this._preprocess.forEach(middleware=>{
       if(res.finished) return;
       middleware(req,res);

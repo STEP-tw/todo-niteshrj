@@ -1,89 +1,56 @@
 {
   "alok": {
-    "ji": {
-      "title": "ji",
-      "desc": "ji"
-    },
-    "g": {
-      "title": "g",
-      "desc": "g"
-    },
-    "gy": {
-      "title": "gy",
-      "desc": "gy",
-      "items": [
-        "d"
-      ]
-    },
-    "milk": {
-      "title": "milk",
-      "desc": "buyMilk",
-      "todoList": "gotoshop",
-      "items": [
-        {
-          "_item": "buyMilk",
-          "_done": false
-        }
-      ]
-    },
-    "also": {
-      "title": "also",
-      "desc": "cgljfufoutfufou"
-    },
-    "hu": {
-      "title": "hu",
-      "desc": "hu"
-    },
-    "jvjh": {
-      "title": "jvjh",
-      "desc": "jvhv"
-    },
-    "aloi": {
-      "title": "aloi",
-      "desc": "iiu",
-      "items": [
-        "hbhivi"
-      ]
-    },
-    "io": {
-      "title": "io",
-      "desc": "iojgiougo",
-      "items": [
-        {
-          "item": "hiyufufufusoi",
-          "done": false
-        }
-      ]
-    },
-    "gi": {
-      "title": "gi",
-      "desc": "igi",
-      "items": [
-        {
-          "item": "hgi",
-          "done": false
-        }
-      ]
-    },
-    "f": {
-      "title": "f",
-      "desc": "f",
-      "items": [
-        {
-          "_item": "f",
-          "_done": false
-        }
-      ]
-    },
-    "jh": {
-      "title": "jh",
-      "desc": "vigigi",
-      "items": [
-        {
-          "_item": "huh",
-          "_done": false
-        }
-      ]
-    }
+    "_username": "alok",
+    "_todos": [
+      {
+        "_title": "hi",
+        "_description": "hi",
+        "_items": []
+      },
+      {
+        "_title": "hi",
+        "_description": "hi",
+        "_items": []
+      },
+      {
+        "_title": "milk",
+        "_description": "buyMilk",
+        "_items": []
+      },
+      {
+        "_title": "milk",
+        "_description": "buyMilk",
+        "_items": []
+      },
+      {
+        "_title": "milk",
+        "_description": "buyMilk",
+        "_items": []
+      },
+      {
+        "_title": "yu",
+        "_description": "yu",
+        "_items": []
+      },
+      {
+        "_title": "op",
+        "_description": "op",
+        "_items": []
+      },
+      {
+        "_title": "rty",
+        "_description": "rty",
+        "_items": [
+          {
+            "_item": "gotoschool",
+            "_done": false
+          }
+        ]
+      }
+    ]
+  },
+  "nitesh": {
+    "_username": "nitesh",
+    "_todos": []
   }
 }
